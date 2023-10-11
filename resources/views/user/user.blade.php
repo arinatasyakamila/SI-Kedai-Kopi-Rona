@@ -2,10 +2,10 @@
 @section('content')
     <div class="card pt-4 px-3 bg-light">
         <div class="page-header flex-wrap">
-            <h3 class="mb-0">Data Vendor</span>
+            <h3 class="mb-0">Data User</span>
             </h3>
             <div class="d-flex">
-                <a href="/vendor/create" class="btn btn-sm ml-3 btn-info">Tambah Data</a>
+                <a href="/user/create" class="btn btn-sm ml-3 btn-info">Tambah Data</a>
             </div>
         </div>
     </div>
@@ -21,39 +21,35 @@
         <div class="col-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body px-0 overflow-auto">
-                    <h4 class="card-title pl-4 text-center">Data Vendor</h4>
+                    <h4 class="card-title pl-4 text-center">Data Pengguna</h4>
                     <div class="table-responsive">
                         <table class="table text-center">
                             <thead class="bg-light">
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Alamat</th>
-                                    <th>No Telepon</th>
+                                    <th>Emai</th>
+                                    <th>Role</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($vendors as $item)
+                                @foreach ($users as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->nama }}</td>
-                                        <td>{{ $item->alamat }}</td>
-                                        <td>{{ $item->no_telp }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->email }}</td>
+                                        <td>{{ $item->role }}</td>
                                         <td>
-                                            <a href="/vendor/{{ $item->id }}/edit" class="btn btn-success">Edit</a>
-                                            <a href="#" class="btn btn-success">View</a>
-                                            <!-- Ganti link Hapus dengan formulir -->
-                                            <form action="/vendor/{{ $item->id }}" method="POST"
+                                            <a href="{{ url('user') }}/{{ $item->id }}/edit" class="btn btn-success">Edit</a>
+                                            <a href="{{ url('user') }}/{{ $item->id }}" class="btn btn-success">View</a>
+                                            <form action="{{ url('user') }}/{{ $item->id }}" method="POST"
                                                 style="display:inline">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger"
                                                     onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
                                             </form>
-
-
-
                                         </td>
                                     </tr>
                                 @endforeach

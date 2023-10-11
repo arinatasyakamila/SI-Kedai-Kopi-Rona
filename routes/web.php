@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\VendorController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\KategoriBarangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +19,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[DashboardController::class,'index'])->middleware('auth');
-Route::get('login',[LoginController::class,'index'])->name('login');
-Route::resource('/data-vendor',VendorController::class);
+Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::post('login-proses', [LoginController::class, 'authenticate']);
+
+Route::middleware(['auth'])->group(function () {
+    // Semua route dalam grup ini akan menggunakan middleware 'auth'
+    Route::get('/', [DashboardController::class, 'index']);
+    Route::post('/logout', [LoginController::class, 'logout']);
+    Route::resource('/vendor', VendorController::class);
+    Route::resource('/user', UserController::class);
+    Route::resource('/barang', BarangController::class);
+    Route::resource('/kategoribarang', KategoriBarangController::class);
+    Route::resource('/user/user', UserController::class);
+});
