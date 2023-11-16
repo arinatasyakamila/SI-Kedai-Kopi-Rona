@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nama')->nullable();
             $table->text('alamat')->nullable();
             $table->string('no_telp')->nullable()->unique();
+            $table->string('gambar')->nullable();
             $table->timestamps();
         });
     }

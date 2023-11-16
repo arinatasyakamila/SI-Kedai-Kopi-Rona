@@ -5,7 +5,9 @@
             <h3 class="mb-0">Data Barang</span>
             </h3>
             <div class="d-flex">
+                @if (Auth::user()->role == 'admin')
                 <a href="/barang/create" class="btn btn-sm ml-3 btn-info">Tambah Data</a>
+                @endif
             </div>
         </div>
     </div>
@@ -51,13 +53,21 @@
                                         <td>{{ $item->satuan }}</td>
                                         <td>{{ $item->stock }}</td>
                                         <td>
-                                            <img src="{{ asset('images/gambar_barang/' . $item->gambar) }}" alt="Gambar Barang" class="img rounded-0" style="width:50%;height:50%">
+                                            <img src="{{ asset('images/gambar_barang/' . $item->gambar) }}"
+                                                alt="Gambar Barang" class="img rounded-0" style="width:50%;height:50%">
                                         </td>
                                         <td>
                                             <a href="/barang/{{ $item->id }}/edit" class="btn btn-success">Edit</a>
                                             <a href="/barang/{{ $item->id }}" class="btn btn-success">View</a>
-                                            <a href="#" class="btn btn-danger">Hapus</a>
-
+                                            @if (Auth::user()->role == 'admin')
+                                                <form action="{{ url('barang') }}/{{ $item->id }}" method="POST"
+                                                    style="display:inline">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger"
+                                                        onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

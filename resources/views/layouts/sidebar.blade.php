@@ -59,13 +59,13 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/barang/masuk">
+        <a class="nav-link" href="/barangmasuk">
             <i class="mdi mdi-arrow-bottom-left menu-icon"></i>
           <span class="menu-title">Barang Masuk</span>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/barang/keluar">
+        <a class="nav-link" href="/barangkeluar">
 
           <i class="mdi mdi-arrow-top-right menu-icon"></i>
           <span class="menu-title">Barang Keluar</span>

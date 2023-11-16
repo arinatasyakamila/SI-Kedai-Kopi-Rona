@@ -41,9 +41,22 @@ class KategoriBarangController extends Controller
         $kategori= new KategoriBarang();
         $kategori->name = $request->input('name');
         $kategori->save();
+
+        $this->initializeStokForKategori($kategori);
+
         return redirect('kategoribarang')->with('success','Data Berhasil Ditambahkan');
     }
 
+    private function initializeStokForKategori(KategoriBarang $kategori)
+    {
+        $barangs = Barang::where('kategori_barang_id', $kategori->id)->get();
+
+        foreach ($barangs as $barang) {
+            // Lakukan operasi lainnya jika diperlukan
+            $barang->stock = 0;
+            $barang->save();
+        }
+    }
     /**
      * Display the specified resource.
      */

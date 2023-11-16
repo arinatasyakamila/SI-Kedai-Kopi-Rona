@@ -9,7 +9,7 @@
             </div>
         </div>
     </div>
-    <div class="container mx-auto mt-5">
+    <div class="container mx-auto mt-5" enctype="multipart/form-data">
         <div class="card">
             <div class="card-title text-center bg-secondary">
                 <h3>Edit Data Barang</h3>
@@ -24,7 +24,7 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ url('barang') }}/{{ $barang->id }}" method="POST">
+                <form action="{{ url('barang') }}/{{ $barang->id }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="row mb-3">
@@ -78,6 +78,25 @@
                                 name="stock">
                         </div>
                     </div>
+
+
+                    <div class="mb-3">
+                        <label for="" class="form-label">Pilih Gambar</label>
+                        <img src="{{ $barang->gambar ? asset('storage/' . $barang->gambar) : '' }}" id="img-preview"
+                            class="img-preview img-fluid w-50 mb-2 d-block" alt="">
+                        <input type="hidden" name="oldImage" id="gambar" value="{{ $barang->gambar }}">
+                        <input type="file" onchange="previewImage()"
+                            class="form-control @error('gambar') is-invalid @enderror" accept="image/*" name="gambar"
+                            id="gambar" placeholder="" aria-describedby="fileHelpId">
+                        <div id="fileHelpId" class="form-text text-danger">Format jpg,jpeg,png</div>
+                        <div class="invalid-feedback">
+                            {{ $errors->has('gambar') ? $errors->first('gambar') : '' }}
+
+                        </div>
+                    </div>
+
+
+
                     <div class="col-2 mx-auto">
                         <button type="submit" class="btn btn-success w-100">SIMPAN</button>
                     </div>

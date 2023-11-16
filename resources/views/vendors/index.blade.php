@@ -18,6 +18,13 @@
         </div>
     @endif
     <div class="row container mx-auto my-5">
+        <form action="/vendor" method="GET" class=" col-3">
+            <div class="input-group mb-3">
+                <input type="text" name="keyword" value="{{ request('search') }}" class="form-control"
+                    placeholder="Search">
+                <button class="btn btn-success" type="submit">search</button>
+            </div>
+        </form>
         <div class="col-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body px-0 overflow-auto">
@@ -30,7 +37,9 @@
                                     <th>Nama</th>
                                     <th>Alamat</th>
                                     <th>No Telepon</th>
+                                    <th>Gambar</th>
                                     <th>Aksi</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -41,8 +50,11 @@
                                         <td>{{ $item->alamat }}</td>
                                         <td>{{ $item->no_telp }}</td>
                                         <td>
+                                            <img src="{{ asset('images/gambar_vendor/' . $item->gambar) }}" alt="Gambar Vendor" class="img rounded-0" style="width:50%;height:50%">
+                                        </td>
+                                        <td>
                                             <a href="/vendor/{{ $item->id }}/edit" class="btn btn-success">Edit</a>
-                                            <a href="#" class="btn btn-success">View</a>
+                                            <a href="/vendor/{{ $item->id }}" class="btn btn-success">View</a>
                                             <!-- Ganti link Hapus dengan formulir -->
                                             <form action="/vendor/{{ $item->id }}" method="POST"
                                                 style="display:inline">

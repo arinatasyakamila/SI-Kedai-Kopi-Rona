@@ -27,7 +27,7 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ url('user') }}/{{ $user->id }}" method="POST">
+            <form action="{{ url('user') }}/{{ $user->id }}" method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="row mb-3">

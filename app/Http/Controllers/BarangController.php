@@ -87,7 +87,6 @@ class BarangController extends Controller
         $barang = Barang::find($id);
         return view('barang.update', compact('barang', 'kategori'));
     }
-
     /**
      * Update the specified resource in storage.
      */
@@ -100,17 +99,36 @@ class BarangController extends Controller
             'kode' => 'required',
             'bahan_baku' => 'required',
             'satuan' => 'required',
-            'stock' => 'required'
+            'stock' => 'required',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
 
         $barang->update([
             'kode' => $request->input('kode'),
             'kategori_barang_id' => $request->input('kategori'),
             'bahan_baku' => $request->input('bahan_baku'),
             'satuan' => $request->input('satuan'),
-            'stock' => $request->input('stock')
+            'stock' => $request->input('stock'),
+            //'gambar' => $request->input('gambar'),
+
         ]);
 
+        if ($request->hasFile('gambar')) {
+            // Delete the old image
+            Storage::delete($barang->gambar);
+
+            // Upload the new image
+            $gambar = $request->file('gambar');
+            $namaFile = time() . '.' . $gambar->getClientOriginalExtension();
+            $gambar->move(public_path('images/gambar_barang'), $namaFile);
+
+            // Update the image field in the database
+            $barang->update(['gambar' => $namaFile]);
+        }
+
+
+        //Barang::where('id',$barang->id)->update($validate);
         return redirect()->route('barang.index')->with('success', 'User updated successfully');
     }
 

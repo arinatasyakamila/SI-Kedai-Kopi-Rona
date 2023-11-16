@@ -5,7 +5,9 @@
             <h3 class="mb-0">Data User</span>
             </h3>
             <div class="d-flex">
+                @if (Auth::user()->role == 'admin')
                 <a href="/user/create" class="btn btn-sm ml-3 btn-info">Tambah Data</a>
+                @endif
             </div>
         </div>
     </div>
@@ -28,7 +30,8 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Nama</th>
-                                    <th>Emai</th>
+                                    <th>Email</th>
+                                    <th>Gambar</th>
                                     <th>Role</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -39,10 +42,14 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
+                                        <td>
+                                            <img src="{{ asset('images/gambar_user/' . $item->gambar) }}" alt="Gambar Barang" class="img rounded-0" style="width:50%;height:50%">
+                                        </td>
                                         <td>{{ $item->role }}</td>
                                         <td>
                                             <a href="{{ url('user') }}/{{ $item->id }}/edit" class="btn btn-success">Edit</a>
                                             <a href="{{ url('user') }}/{{ $item->id }}" class="btn btn-success">View</a>
+                                            @if (Auth::user()->role == 'admin')
                                             <form action="{{ url('user') }}/{{ $item->id }}" method="POST"
                                                 style="display:inline">
                                                 @csrf
@@ -50,6 +57,7 @@
                                                 <button type="submit" class="btn btn-danger"
                                                     onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</button>
                                             </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

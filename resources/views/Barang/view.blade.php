@@ -10,44 +10,55 @@
                 <a href="{{ url('barang') }}" class="btn btn-sm ml-3 btn-danger">Kembali</a>
             </div>
         </div>
-        </div>
+    </div>
 
-        <div class="row container mx-auto my-5">
-            <div class="col-12 grid-margin stretch-card">
-                <div class="card">
-                    <div class="card-body px-0 overflow-auto">
-                        <h4 class="card-title pl-4 text-center">Data Barang</h4>
-                        <div class="table-responsive">
-                            <table class="table text-center">
-                                <thead class="bg-light">
+    <div class="row container mx-auto my-5">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body px-0 overflow-auto">
+                    <h4 class="card-title pl-4 text-center">Data Barang</h4>
+                    <div class="table-responsive">
+                        <table class="table text-center">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th>Kategori ID</th>
+                                    <th>Kode</th>
+                                    <th>Bahan Baku</th>
+                                    <th>Satuan</th>
+                                    <th>Stock</th>
+                                    <th>Gambar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($barang as $item)
                                     <tr>
-                                        <th>Kategori ID</th>
-                                        <th>Kode</th>
-                                        <th>Bahan Baku</th>
-                                        <th>Satuan</th>
-                                        <th>Stock</th>
+                                        <td>{{ $item->kategori_barang_id }}</td>
+                                        <td>{{ $item->kode }}</td>
+                                        <td>{{ $item->bahan_baku }}</td>
+                                        <td>{{ $item->satuan }}</td>
+                                        <td>{{ $item->stock }}</td>
+                                        <td>
+                                            @if ($item->gambar)
+                                                <img src="{{ asset('/images/gambar_barang/' . $item->gambar) }}"
+                                                    alt="Gambar Barang" style="width: 100%; height: 100%">
+                                            @else
+                                                Tidak Ada Gambar
+                                            @endif
+                                        </td>
+
+
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse($barang as $item)
-                                        <tr>
-                                            <td>{{ $item->kategori_barang_id }}</td>
-                                            <td>{{ $item->kode }}</td>
-                                            <td>{{ $item->bahan_baku }}</td>
-                                            <td>{{ $item->satuan }}</td>
-                                            <td>{{ $item->stock }}</td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="5">Tidak ada data barang.</td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
+                                @empty
+                                    <tr>
+                                        <td colspan="5">Tidak ada data barang.</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @endsection
+    </div>
+@endsection

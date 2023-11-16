@@ -26,6 +26,7 @@
                                         <th>Nama Barang</th>
                                         <th>Satuan</th>
                                         <th>Stock</th>
+                                        <th>Gambar</th>
 
                                     </tr>
                                 </thead>
@@ -37,7 +38,7 @@
                                             <td>{{ $item->bahan_baku }}</td>
                                             <td>{{ $item->satuan }}</td>
                                             <td>{{ $item->stock }}</td>
-
+                                            <td>{{ $item->gambar }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

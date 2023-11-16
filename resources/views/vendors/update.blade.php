@@ -26,7 +26,7 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('vendor.update', $vendor->id) }}" method="POST">
+            <form action="{{ url('vendor') }}/{{ $vendor->id }}"  method="POST" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="row mb-3">
@@ -53,6 +53,23 @@
                         <input type="no_telp" class="form-control" id="no_telp" value="{{ $vendor->no_telp }}" name="no_telp">
                     </div>
                 </div>
+
+                <div class="mb-3">
+                    <label for="" class="form-label">Pilih Gambar</label>
+                    <img src="{{ $vendor->gambar ? asset('storage/' . $vendor->gambar) : '' }}" id="img-preview"
+                        class="img-preview img-fluid w-50 mb-2 d-block" alt="">
+                    <input type="hidden" name="oldImage" id="gambar" value="{{ $vendor->gambar }}">
+                    <input type="file" onchange="previewImage()"
+                        class="form-control @error('gambar') is-invalid @enderror" accept="image/*" name="gambar"
+                        id="gambar" placeholder="" aria-describedby="fileHelpId">
+                    <div id="fileHelpId" class="form-text text-danger">Format jpg,jpeg,png</div>
+                    <div class="invalid-feedback">
+                        {{ $errors->has('gambar') ? $errors->first('gambar') : '' }}
+
+                    </div>
+                </div>
+
+
                 <div class="col-2 mx-auto">
                     <button type="submit" class="btn btn-success w-100">SIMPAN</button>
                 </div>

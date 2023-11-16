@@ -22,6 +22,7 @@ class BarangSeeder extends Seeder
             'bahan_baku'=>'Greenfield Freshmilk',
             'satuan'=>'Ml',
             'stock'=>'10',
+            
         ]);
     }
 }

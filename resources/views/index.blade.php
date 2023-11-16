@@ -12,7 +12,7 @@
                 <div class="card-body px-3 py-4">
                     <div class="d-flex justify-content-between align-items-start">
                         <div class="color-card">
-                            <p class="mb-0 color-card-head">Data Barang</p>
+                            <p class="mb-0 color-card-head"> <a class="nav-link" href="/kategoribarang">Data Barang</a></p>
                             <h2 class="text-white"> <span class="h5"></span>
                             </h2>
                         </div>

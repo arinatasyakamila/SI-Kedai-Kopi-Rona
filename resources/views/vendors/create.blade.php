@@ -26,7 +26,7 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ url('vendor') }}" method="POST">
+            <form action="{{ url('vendor') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-2 my-auto">
@@ -52,11 +52,23 @@
                         <input type="no_telp" class="form-control" id="no_telp" name="no_telp">
                     </div>
                 </div>
+
+                <div class="row mb-3">
+                    <div class="col-2 my-auto">
+                        <label for="stock">Gambar</label>
+                    </div>
+                    <div class="col-10">
+                        <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*">
+                    </div>
+
+                </div>
+
+
                 <div class="col-2 mx-auto">
                     <button type="submit" class="btn btn-success w-100">SIMPAN</button>
                 </div>
             </form>
         </div>
     </div>
-    
+
 @endsection

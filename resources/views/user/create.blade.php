@@ -24,7 +24,7 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{ url('user') }}" method="POST">
+                <form action="{{ url('user') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row mb-3">
                         <div class="col-2 my-auto">
@@ -48,6 +48,14 @@
                         </div>
                         <div class="col-10">
                             <input type="password" class="form-control" id="password" name="password">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-2 my-auto">
+                            <label for="stock">Gambar</label>
+                        </div>
+                        <div class="col-10">
+                            <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*">
                         </div>
                     </div>
                     <div class="col-2 mx-auto">
